@@ -61,6 +61,8 @@ class Swiper extends Component {
 
     this.initializeCardStyle()
     this.initializePanResponder()
+
+    this.swipeBack = this.swipeBack.bind(this);
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -354,16 +356,23 @@ class Swiper extends Component {
     this.props.onSwipedAborted()
   }
 
-  swipeBack = cb => {
+  setStateAsync(state) {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
+    });
+  }
+
+  async swipeBack(cb) {
     const { swipeBackXYPositions, isSwipingBack } = this.state
     const { infinite } = this.props
     const canSwipeBack = !isSwipingBack && (swipeBackXYPositions.length > 0 || infinite)
     if (!canSwipeBack) {
-      return
+      return { canSwipeBack }
     }
-    this.setState({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
+    await this.setStateAsync({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
       this.animatePreviousCard(this.calculateNextPreviousCardPosition(), cb)
     })
+    return { canSwipeBack }
   }
 
   swipeLeft = (mustDecrementCardIndex = false) => {
