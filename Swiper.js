@@ -362,7 +362,7 @@ class Swiper extends Component {
     if (!canSwipeBack) {
       return { canSwipeBack }
     }
-    this.setStateAsync({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
+    this.setState({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
       this.animatePreviousCard(this.calculateNextPreviousCardPosition(), cb)
     })
     return { canSwipeBack }
