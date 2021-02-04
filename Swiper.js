@@ -354,18 +354,21 @@ class Swiper extends Component {
     this.props.onSwipedAborted()
   }
 
+  getCanSwipeBack = () => {
+    const { swipeBackXYPositions, isSwipingBack } = this.state
+    const { infinite } = this.props
+    return !isSwipingBack && (swipeBackXYPositions.length > 0 || infinite)
+  }
 
   swipeBack = cb => {
     const { swipeBackXYPositions, isSwipingBack } = this.state
-    const { infinite } = this.props
-    const canSwipeBack = !isSwipingBack && (swipeBackXYPositions.length > 0 || infinite)
+    const canSwipeBack = this.getCanSwipeBack
     if (!canSwipeBack) {
-      return { canSwipeBack }
+      return
     }
     this.setState({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
       this.animatePreviousCard(this.calculateNextPreviousCardPosition(), cb)
     })
-    return { canSwipeBack }
   }
 
   swipeLeft = (mustDecrementCardIndex = false) => {

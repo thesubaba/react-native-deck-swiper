@@ -82,5 +82,6 @@ declare module 'react-native-deck-swiper' {
     swipeBack: (
       cb?: (previousCardIndex: number, previousCard: T) => void
     ) => void;
+    getCanSwipeBack: () => void;
   }
 }
