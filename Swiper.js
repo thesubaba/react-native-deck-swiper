@@ -362,7 +362,7 @@ class Swiper extends Component {
 
   swipeBack = cb => {
     const { swipeBackXYPositions, isSwipingBack } = this.state
-    const canSwipeBack = this.getCanSwipeBack
+    const canSwipeBack = this.getCanSwipeBack()
     if (!canSwipeBack) {
       return
     }
