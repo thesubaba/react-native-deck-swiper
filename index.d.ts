@@ -71,6 +71,7 @@ declare module 'react-native-deck-swiper' {
     verticalThreshold?: number;
     zoomAnimationDuration?: number;
     zoomFriction?: number;
+    languageCode?: string;
   }
 
   export default class Swiper<T> extends React.Component<SwiperProps<T>> {

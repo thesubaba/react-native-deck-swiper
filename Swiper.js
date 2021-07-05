@@ -76,7 +76,10 @@ class Swiper extends Component {
       nextState.labelType !== state.labelType ||
       nextState.swipedAllCards !== state.swipedAllCards
     )
-    return propsChanged || stateChanged
+    const lenguageChanged = (
+      props.languageCode !== nextProps.languageCode
+    )
+    return propsChanged || stateChanged || lenguageChanged
   }
 
   componentWillUnmount = () => {
@@ -519,7 +522,7 @@ class Swiper extends Component {
           swipedAllCards = true
         }
       } else {
-        newCardIndex = 0;
+        newCardIndex = 0
       }
     }
 
@@ -773,7 +776,7 @@ class Swiper extends Component {
     let cardPosition = 0
 
     if (!cards.length) {
-      return [];
+      return []
     }
 
     while (stackSize-- > 0 && (firstCard || showSecondCard) && !swipedAllCards) {
@@ -923,7 +926,8 @@ Swiper.propTypes = {
   verticalSwipe: PropTypes.bool,
   verticalThreshold: PropTypes.number,
   zoomAnimationDuration: PropTypes.number,
-  zoomFriction: PropTypes.number
+  zoomFriction: PropTypes.number,
+  languageCode: PropTypes.string
 }
 
 Swiper.defaultProps = {
@@ -1017,7 +1021,8 @@ Swiper.defaultProps = {
   verticalSwipe: true,
   verticalThreshold: height / 5,
   zoomAnimationDuration: 100,
-  zoomFriction: 7
+  zoomFriction: 7,
+  languageCode: 'ENG'
 }
 
 export default Swiper
