@@ -452,16 +452,18 @@ class Swiper extends Component {
     previousCardX.setValue(x * SWIPE_MULTIPLY_FACTOR)
     previousCardY.setValue(y * SWIPE_MULTIPLY_FACTOR)
     Animated.parallel([
-      Animated.spring(this.state.previousCardX, {
+      Animated.timing(this.state.previousCardX, {
         toValue: 0,
-        friction: this.props.stackAnimationFriction,
-        tension: this.props.stackAnimationTension,
+        // friction: this.props.stackAnimationFriction,
+        // tension: this.props.stackAnimationTension,
+        duration: this.props.swipeAnimationDuration,
         useNativeDriver: true
       }),
-      Animated.spring(this.state.previousCardY, {
+      Animated.timing(this.state.previousCardY, {
         toValue: 0,
-        friction: this.props.stackAnimationFriction,
-        tension: this.props.stackAnimationTension,
+        // friction: this.props.stackAnimationFriction,
+        duration: this.props.swipeAnimationDuration,
+        // tension: this.props.stackAnimationTension,
         useNativeDriver: true
       })
     ]).start(() => {
@@ -1014,7 +1016,7 @@ Swiper.defaultProps = {
   stackScale: 3,
   stackSeparation: 10,
   stackSize: 1,
-  swipeAnimationDuration: 350,
+  swipeAnimationDuration: 200,
   swipeBackCard: false,
   topCardResetAnimationFriction: 7,
   topCardResetAnimationTension: 40,
